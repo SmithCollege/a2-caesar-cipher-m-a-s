@@ -5,19 +5,36 @@ package a1template;
 public class DynamicArray<T> implements IndexAccess<T>{
     
     // What instance variables do you need?
-    char [] baseArray;
-    int offset;
-    int highIndex;
-    int lowIndex; 
+    T[] baseArray;
+    int offset; 
 
     // Write a constructor to make a new DynamicArray Object from an array
-    public DynamicArray(char [] baseArray,int offset, int highIndex, int lowIndex ){
-        this.baseArray=baseArray;
+    public DynamicArray(int offset,T[] baseArray){
         this.offset=offset;
-        this.highIndex=highIndex;
-        this.lowIndex=lowIndex;
+        this.baseArray=(T[])new Character[baseArray.length];
+        int i=0;
+        int o=0;
+        while (i<baseArray.length){
+            o=i+(offset % baseArray.length);
+            this.baseArray[i]=baseArray[o];
+        }
+        
     }
 
- }
- // Now implement the methods from IndexAccess?
+    public T get(int index){
+        return this.baseArray[index];
+    }
+
+    public T get(int index, int offset){
+        int x = 0;
+        if (index + offset >= baseArray.length){
+            x = offset % baseArray.length;
+        }
+        return this.baseArray[index+x];
+    }
+
+    public void set(int index, T element){
+        this.baseArray[index] = element;
+    }
+}
 
