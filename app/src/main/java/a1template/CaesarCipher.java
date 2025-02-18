@@ -48,11 +48,14 @@ public class CaesarCipher {
      * @param T message to encode
      * @return encoded message */  
     public String encode(String message){
+        if (message == null || message.isEmpty()) {
+            return ""; // Handle empty message case
+        }
         String encodedMessage="";
         Scanner scanner = new Scanner(message);
         scanner.useDelimiter("");
-        char letter;
         int i=0;
+        char letter;
         Character [] messageArray= new Character[message.length()];
         
         while (scanner.hasNext()){

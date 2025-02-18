@@ -11,12 +11,13 @@ public class DynamicArray<T> implements IndexAccess<T>{
     // Write a constructor to make a new DynamicArray Object from an array
     public DynamicArray(int offset,T[] baseArray){
         this.offset=offset;
-        this.baseArray=(T[])new Character[baseArray.length];
+        this.baseArray=(T[]) new Object[baseArray.length];
         int i=0;
         int o=0;
         while (i<baseArray.length){
             o=i+(offset % baseArray.length);
             this.baseArray[i]=baseArray[o];
+            i++;
         }
         
     }
