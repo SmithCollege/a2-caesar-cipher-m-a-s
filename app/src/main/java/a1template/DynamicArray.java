@@ -34,6 +34,7 @@ public class DynamicArray<T> implements IndexAccess<T>{
         int actualIndex = (index + offset) % n;
         actualIndex = (actualIndex + n) % n; // Handles both positive and negative indices
         return actualIndex;
+
     }
 
 }
