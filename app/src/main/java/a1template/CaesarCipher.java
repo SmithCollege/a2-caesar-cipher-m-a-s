@@ -19,7 +19,13 @@ public class CaesarCipher {
      * @param offset Offset to use when creating `cipher` of DynamicArray type
      */
     CaesarCipher(int offset){
+        // Fill in here
+        this.alphabet = new Character[26];
+        for (int i = 0; i < 26; i++) {
+            alphabet[i] = (char) ('a' + i);
+        }
         this.offset = offset;
+        this.cipher = new DynamicArray<>(26, alphabet);
     }
 
     /** Implementation of linear search that looks through the alphabet
@@ -30,7 +36,13 @@ public class CaesarCipher {
     public int findIndex(char val){
         // This is a stub -- fill in the code and return the
         // value you calculate
-        return 0;
+        int position = 0;
+        for (int i=0; i<26; i++){
+            if (alphabet[i]==val){
+                position = i;
+            }
+        }
+        return position;
     }
 
     /** Encode a message using the cipher
@@ -39,8 +51,17 @@ public class CaesarCipher {
      */  
     public String encode(String message){
         // Fill in here and update return statement based on your code
-        return new String(); 
+        int length = message.length();
+        char[] msgArray = message.toCharArray();
+
+        for (int i=0; i<length; i++){
+            int x = findIndex(msgArray[i]);
+            msgArray[i] = alphabet[x+offset];
+        }
+
+        return msgArray.toString(); 
      }
+
 
     /** Decode a message using the cipher 
      * @param String message to decode
@@ -49,9 +70,22 @@ public class CaesarCipher {
      */
     public String decode(String message){
         // Fill in here and update return statement based on your code
-        return new String();
+        int length = message.length();
+        char[] msgArray = message.toCharArray();
+
+        for (int i=0; i<length; i++){
+            int x = findIndex(msgArray[i]);
+            msgArray[i] = alphabet[x-offset];
+        }
+
+        String encodedMessage = msgArray.toString();
+        return encodedMessage; 
     }
 
+    public char get(int index){
+        char x = alphabet[index];
+        return x;
+    }
     public static void main(String[] args) {
     }
     
